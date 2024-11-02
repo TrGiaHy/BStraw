@@ -1,0 +1,100 @@
+.page-numbers {
+    @include flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 5;
+    @include mb(1.6rem);
+
+    >li {
+        &:not(:first-child) {
+            margin-left: 2.5rem;
+        }
+
+        &:first-child {
+            margin-right: .5rem;
+
+            >.page-numbers {
+                border: 0.1rem solid $color-white;
+            }
+        }
+
+        &:last-child {
+            margin-left: .5rem;
+
+            >.page-numbers {
+                border: 0.1rem solid $color-white;
+            }
+        }
+
+        &:nth-child(2) {
+            margin-left: 0;
+        }
+
+        &>.page-numbers {
+            border: 0.1rem solid var(--color-text);
+            width: 3.2rem;
+            height: 3.2rem;
+            border-radius: 100rem;
+            @include mid-flex;
+            background-color: transparent;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            color: var(--color-text);
+            font-weight: 500;
+            @include affter(var(--color-pri));
+
+            &:after {
+                z-index: -1;
+            }
+
+            @include hover {
+                &:not(.dot) {
+                    color: white;
+
+                    &::after {
+                        left: 0;
+                        width: 100%;
+                    }
+                }
+            }
+
+            &.current {
+                color: white;
+                border: 0.1rem solid var(--color-primary);
+
+                &::after {
+                    left: 0;
+                    width: 100%;
+                }
+            }
+
+            &.dot {
+                background-color: transparent;
+            }
+
+            i {
+                font-weight: 400;
+            }
+        }
+    }
+
+    @include max(800px) {
+        margin-top: .8rem;
+
+        >li {
+            &:not(:first-child) {
+                margin-left: 1.25rem;
+            }
+        }
+    }
+
+    @include max(320px) {
+        >li {
+            &:not(:first-child) {
+                margin-left: .525rem;
+            }
+        }
+    }
+}
