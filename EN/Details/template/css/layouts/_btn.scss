@@ -1,0 +1,448 @@
+.btn {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    background: $color-pri;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.5s;
+    display: block;
+    user-select: none;
+    border-radius: 0 2rem;
+    flex-shrink: 0;
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+
+    &.flex {
+        @include flex;
+        align-items: center;
+    }
+
+    .icon {
+        width: 3.1rem;
+        height: 3.1rem;
+        @include mid-flex;
+        flex-shrink: 0;
+        font-size: 1.2rem;
+        transition: all 0.3s 0.2s ease-in-out;
+    }
+
+    &.buy-now {
+        border-radius: 4rem;
+
+        .btn-inner {
+            padding: .4rem 3rem .76rem 3rem;
+            @include fz-24;
+
+            .text {
+                font-weight: 600;
+            }
+        }
+    }
+
+    &.tabbtn {
+        border-radius: 4rem;
+        border-color: var(--color-text);
+
+        .btn-inner {
+            color: var(--color-text);
+            @include fz-24;
+            font-weight: 700;
+            padding: 1rem 2rem;
+            border: 1px solid var(--color-text);
+            border-radius: 4rem;
+        }
+    }
+
+    &.heart {
+        border-radius: 4rem;
+
+        .btn-inner {
+            @include fz-23;
+            padding: 1rem;
+            border-radius: 4rem !important;
+        }
+    }
+
+    &.see-now {
+        border-radius: 4rem;
+
+        .btn-inner {
+            padding: .6rem 2.1rem;
+            @include fz-19;
+            border-radius: 4rem !important;
+        }
+    }
+
+    &.see-more {
+        border-radius: .5rem;
+
+        .btn-inner {
+            border-radius: .5rem !important;
+            padding: 1.2rem 2.2rem;
+
+            @include max(400px) {
+                padding: .6rem 1.1rem;
+
+                .icon {
+                    margin-right: .4rem;
+                }
+            }
+        }
+    }
+
+    .text {
+        z-index: 4;
+        position: relative;
+        transition: .4s;
+    }
+
+    &::before {
+        position: absolute;
+        content: "";
+        width: 130%;
+        height: 105%;
+        top: 0;
+        left: -13%;
+        background: $color-second;
+        // background: $color-white;
+        transition: transform 0.6s 0.1s;
+        z-index: 1;
+        transform-origin: right;
+        transform: skew(30deg) scaleX(0);
+    }
+
+    &:after {
+        position: absolute;
+        content: "";
+        width: 120%;
+        height: 102%;
+        top: 0;
+        left: -13%;
+        // background: rgba(0, 0, 0, 0.2);
+        background: $color-pri;
+        transition: transform 0.6s;
+        z-index: 0;
+        transform-origin: right;
+        transform: skew(30deg) scaleX(0);
+    }
+
+    &-inner {
+        position: relative;
+        z-index: 4;
+        color: $color-black;
+
+        text-align: center;
+        @include transition(0.3s, ease-in-out);
+        // padding: 1.2rem 2.8rem 1.1rem;
+        padding: .9rem 4.2rem;
+        @include fz-24;
+        font-weight: 700;
+        @include fz-16;
+        font-weight: 700;
+        line-height: 1.4;
+        overflow: hidden;
+        @include mid-flex;
+        // border-radius: 10rem;
+        // font-family: 'Be Vietnam Pro';
+        @include font-third;
+        white-space: nowrap;
+        -webkit-mask-image: -webkit-radial-gradient(white, black);
+
+        @include max(400px) {
+            padding: 0.8rem 1rem 0.7rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+    }
+
+    &:hover {
+        &::before {
+            transform: skew(30deg) scaleX(1);
+            transform-origin: left;
+        }
+
+        &::after {
+            transform: skew(30deg) scaleX(1);
+            transform-origin: left;
+        }
+    }
+
+    &-hover {
+        position: relative;
+        overflow: hidden;
+        display: block;
+
+        &::before {
+            position: absolute;
+            content: "";
+            width: 150%;
+            height: 102%;
+            top: 0;
+            left: -18%;
+            background: $color-pri;
+            transition: transform 0.6s 0.1s;
+            z-index: 0;
+            transform: skew(30deg) scaleX(0);
+            transform-origin: right;
+        }
+
+        &:after {
+            position: absolute;
+            content: "";
+            width: 150%;
+            height: 102%;
+            top: 0;
+            left: -18%;
+            background: #72C3D5;
+            transition: transform 0.6s;
+            z-index: -1;
+            transform: skew(30deg) scaleX(0);
+            transform-origin: right;
+        }
+
+        &:hover {
+            &::before {
+                transform: skew(30deg) scaleX(1.1);
+                transform-origin: left;
+            }
+
+            &::after {
+                transform: skew(30deg) scaleX(1.1);
+                transform-origin: left;
+            }
+        }
+    }
+
+    &.t-white {
+        .btn-inner {
+            color: white;
+
+            .text {
+                color: white;
+            }
+        }
+    }
+
+    &.t-pri {
+        .btn-inner {
+            color: $color-pri;
+
+            .text {
+                color: $color-pri;
+            }
+        }
+
+        &:hover {
+            .btn-inner {
+                color: $color-pri;
+
+                .text {
+                    color: white;
+                }
+            }
+        }
+    }
+
+    &.t-red {
+        .btn-inner {
+            color: #E51515;
+
+            .text {
+                color: #E51515;
+            }
+        }
+    }
+
+    &.t-black {
+        .btn-inner {
+            color: $color-black;
+
+            .text {
+                color: $color-black;
+            }
+        }
+
+        &:hover {
+            .btn-inner {
+                color: white;
+
+                .text {
+                    color: white;
+                }
+            }
+        }
+    }
+
+    &.t-second {
+        .btn-inner {
+            color: $color-white;
+
+            .text {
+                color: $color-white;
+            }
+        }
+
+        &:hover {
+            .btn-inner {
+                color: white;
+
+                .text {
+                    color: white;
+                }
+
+                .icon-left {
+                    filter: brightness(0) invert(1);
+                }
+            }
+        }
+    }
+
+    &.bd-pri {
+        .btn-inner {
+            border: 0.1rem solid $color-pri;
+            border-radius: 0 2rem;
+        }
+    }
+
+    &.bd-second {
+        .btn-inner {
+            border: 0.1rem solid rgba($color: $color-second, $alpha: 0.7);
+            border-radius: 2rem;
+        }
+    }
+
+    &.bd-third {
+        .btn-inner {
+            border: 0.1rem solid #E51515;
+        }
+    }
+
+    &.bd-white {
+        .btn-inner {
+            border: 0.1rem solid white;
+        }
+    }
+
+    &.bd-black {
+        .btn-inner {
+            border: 0.1rem solid black;
+        }
+    }
+
+    &.bd-gray {
+        .btn-inner {
+            border: 0.1rem solid rgba(0, 0, 0, 0.2);
+        }
+    }
+
+    &.bg-white {
+        background: white;
+
+        &::before {
+            background-color: $color-pri;
+        }
+    }
+
+    &.no-bg {
+        background: transparent;
+
+        &:hover {
+            .btn-inner {
+                color: $color-white;
+            }
+
+            &::before {
+                transform: skew(30deg) scaleX(1);
+                transform-origin: left;
+            }
+
+            &::after {
+                transform: skew(30deg) scaleX(1);
+                transform-origin: left;
+            }
+
+            .icon {
+                filter: brightness(0) invert(1);
+            }
+        }
+    }
+
+    &.fw {
+        width: 100%;
+    }
+
+    &.non-upper {
+        .btn-inner {
+            text-transform: none;
+        }
+    }
+
+    &.icon {
+        .btn-inner {
+            padding: 1.2rem 3.2rem 1.1rem;
+        }
+
+        &-left {
+            .icon {
+                margin-right: 0.8rem;
+            }
+        }
+
+        &-right {
+            .icon {
+                margin-left: 0.8rem;
+            }
+        }
+    }
+
+    &.center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &-second {
+        background: $color-second;
+
+        .btn-inner {
+            font-size: 1.6rem;
+        }
+
+        &::before {
+            background: $color-pri;
+        }
+    }
+
+    &-third {
+        background: $color-second;
+
+        &::before {
+            background: $color-pri;
+        }
+
+        .btn-inner {
+            font-weight: 700;
+            font-size: 1.6rem;
+            padding: 0.8rem 0.8rem 0.7rem;
+        }
+    }
+
+    &-fourth {
+        background: $color-pri;
+
+        &::before {
+            background: $color-third;
+        }
+    }
+}
+
+.seeDetail {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    transition: 0.4s;
+
+    @include hover {
+        color: var(--color-second);
+    }
+}

@@ -1,0 +1,336 @@
+/*** Import *****/
+@import url('loading-btn.css');
+@import url('loading-group.css');
+
+/*** End ****/
+
+.blog-info-tag span:before {
+    content: ',';
+    position: absolute;
+    bottom: 6px;
+    right: 0;
+    height: 100%;
+    font-size: 16px;
+    width: auto;
+    padding-right: 5px;
+}
+
+.blog-info-tag span {
+    position: relative;
+    display: inline-block;
+    padding-right: 10px;
+}
+
+.blog-info-tag span:last-child:before {
+    display: none
+}
+
+.wpcf7 form .wpcf7-response-output {
+    border: 0;
+    margin: 15px 0;
+    padding: 0;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.wpcf7 form.sent .wpcf7-response-output {
+    color: white;
+}
+
+.wpcf7 form.invalid .wpcf7-response-output {
+    color: red;
+}
+#wp-admin-bar-wp-logo img{
+    width: 30px;
+}
+.hide-sitename{
+    visibility: hidden;
+    height: 0;
+    width: 0;
+}
+
+/*
+* CSS trang chi tiết sản phẩm
+*/
+.tabThumbnail {
+    cursor: pointer;
+}
+
+.panelThumbnail {
+    display: none;
+}
+
+.panelThumbnail.active {
+    display: block;
+}
+
+.mona-mess-empty{
+    text-align:  center;
+    margin: 2rem;
+    width: 100%;
+}
+
+.mb-10 {
+    margin-bottom: 10.2rem;
+}
+
+.tabs {
+    margin-bottom: 15px;
+}
+
+.tablinks {
+    font-size: 16px;
+    display: inline-block;
+    margin-right: 20px;
+    padding: 10px;
+}
+
+.tablinks.active {
+    color: white;
+    background-color: #87ca60;
+}
+
+.tabcontent {
+    display: none;
+}
+
+.tabcontent.active {
+    display: block;
+}
+
+.tabcontent iframe {
+    width: 100%;
+}
+
+.ecolife-item-wr {
+    width: 100%;
+}
+
+/* Form CF 7 */
+.info-group-left .wpcf7 {
+    width: 100%;
+}
+
+form .wpcf7-not-valid-tip {
+    color: #dc3232;
+}
+
+form .btn .btn-inner {
+    text-wrap: pretty;
+}
+
+form .btn .wpcf7-spinner {
+    top: 10px;
+    right: -10px;
+}
+
+.free-regis-wr .wpcf7-spinner {
+    position: absolute;
+}
+
+.contact-form .register-form-wr .wpcf7-form-control-wrap {
+    border: none;
+}
+
+.popup-lienhe .wpcf7-form-control-wrap {
+    border: none;
+}
+
+.popup-lienhe .wpcf7-form-control-wrap .input-item {
+    border: 1px solid rgba(108, 114, 117, 0.2);
+}
+.wpcf7-form .wpcf7-response-output {
+    color: red !important;
+}
+
+.wpcf7-form.sent .wpcf7-response-output {
+    color: #46b450 !important;
+}
+
+.form-trial .wpcf7-not-valid-tip {
+    position: absolute;
+    bottom: -2em;
+    left: 0;
+}
+
+.free-regis-wr .wpcf7 form.invalid .wpcf7-response-output {
+    color: #dc3232 !important;
+}
+
+.free-regis-wr .wpcf7-form.sent .wpcf7-response-output {
+    color: white !important;
+}
+
+.popup-thanks {
+    z-index: 1000;
+}
+
+.popup-thanks .content {
+    text-align: center;
+    padding-top: 50px;
+}
+
+.popup-thanks .content h3 {
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+}
+
+.newsdt-share {
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 0.8rem;
+    padding-top: 1.2rem;
+    border-top: 0.1rem solid #ececec;
+}
+
+.newsdt-share .newsdt-socials {
+    -webkit-box-pack: unset;
+    -ms-flex-pack: unset;
+    justify-content: unset;
+}
+
+.newsdt-socials {
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.6rem;
+}
+
+.newsdt-socials .i-link {
+    width: 1.8rem;
+    height: 1.8rem;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
+
+/* Sticky social */
+.notice {
+    position: fixed;
+    bottom: 12rem;
+    right: 3rem;
+    z-index: 7;
+}
+
+.notice-ul {
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.notice-it .i-link {
+    width: 4.8rem;
+    height: 4.8rem;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+    border-radius: 0.8rem;
+    background: var(--color-pri);
+}
+
+.notice-it .i-link img {
+    width: 2.4rem;
+    height: 2.4rem;
+}
+
+.back-to-top {
+    width: 4.8rem;
+    height: 4.8rem;
+}
+
+.product .product-right .bn-group .bn-inner img {
+    border: 0.4rem solid #87CA60;
+}
+
+.blog-post-wr .tt {
+    font-size: 2.8rem;
+}
+
+@media ( max-width: 490px ) {
+    form.wpcf7-form.invalid .btn {
+        margin-top: 2.5em;
+    }
+}
+
+@media (max-width: 768px) {
+    .notice {
+        right: 1.5rem;
+    }
+}
+
+@media (max-width: 800px) {
+    .blog-right {
+        margin-top: 5rem;
+    }
+
+    .blog-post-wr .tt {
+        font-size: 2.1rem;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .blog-post-wr .tt {
+        font-size: 2.4rem;
+    }
+}
+.mona-content ul, .mona-content ol {
+    list-style: disc;
+    margin-left: 1.5rem;
+}

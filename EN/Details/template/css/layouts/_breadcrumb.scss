@@ -1,0 +1,68 @@
+.breadcrumb {
+    @include mt(2.1rem);
+    @include mb(4.4rem);
+    padding: 1.2rem 0;
+
+    &-wrapper {
+        @include min($res-mobile) {
+            width: fit-content;
+        }
+    }
+
+    &-list {
+        @include flex;
+        align-items: center;
+        flex-wrap: wrap;
+        overflow: hidden;
+        gap: 0;
+    }
+
+    &-item {
+        @include fz-24;
+        display: flex;
+        align-items: center;
+        gap: .8rem;
+        font-weight: 500;
+        color: var(--Black-900);
+        margin-left: 4rem;
+
+        &:first-child {
+            margin-left: 0;
+        }
+
+        &:not(:first-child) {
+            position: relative;
+
+            &::before {
+                @include pseudo;
+                // display: inline-block;
+                // content: '';
+                // border-radius: 100rem;
+                // vertical-align: middle;
+                width: 2.8rem;
+                height: 2.8rem;
+                top: 50%;
+                left: -3.2rem;
+                transform: translateY(-50%);
+                background-image: url(../assets/images/ic-chevron-right.svg);
+                background-repeat: no-repeat;
+                background-size: contain;
+                z-index: 2;
+            }
+        }
+
+        &:last-child {
+            color: var(--Black-900);
+            pointer-events: none;
+        }
+
+        @include hover {
+            text-decoration: underline;
+        }
+    }
+
+    &-link {
+        color: inherit;
+        transition: .2s ease-in-out;
+    }
+}
