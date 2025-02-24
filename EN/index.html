@@ -1127,10 +1127,39 @@
             <div class="free-regis">
                 <div class="free-regis-wr">
                     <h2 class="tt">
-                        Towards a Green Future</h2>
+                        Towards a Green Future
+                        <br>
+                        Currently there are <span id="visitCount">0</span> people following our journey on the website
+                        BStraw
+                    </h2>
                 </div>
             </div>
         </div>
+        <script>
+            // Hàm đọc giá trị từ cookie
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+            }
+
+            // Hàm ghi giá trị vào cookie
+            function setCookie(name, value, days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
+            }
+
+            // Lấy giá trị từ cookie
+            let visitCount = parseInt(getCookie('visitCount')) || 0;
+
+            // Tăng giá trị lên 1
+            visitCount++;
+            setCookie('visitCount', visitCount, 30); // Lưu trong 30 ngày
+
+            // Hiển thị giá trị lên trang
+            document.getElementById('visitCount').textContent = visitCount;
+        </script>
     </main>
 
     <div id="footer"></div>
@@ -1144,7 +1173,40 @@
         includeHTML("header", "header.html");
         includeHTML("footer", "footer.html");
     </script>
+    <script>
+        // Hàm để load file HTML vào phần tử có id tương ứng
+        function includeHTML(id, url) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => document.getElementById(id).innerHTML = data);
+        }
 
+        // Tải footer
+        includeHTML("footer", "footer.html");
+
+        // Hàm khởi tạo bộ đếm
+        function initCounter() {
+            let count = localStorage.getItem("fbClickCount") || 0;
+            document.getElementById("fbCount").textContent = count;
+
+            document.querySelector(".fb-overlay").addEventListener("click", function (e) {
+                e.preventDefault();
+                count++;
+                localStorage.setItem("fbClickCount", count);
+                document.getElementById("fbCount").textContent = count;
+
+                // Mở tab mới sau 300ms
+                setTimeout(() => {
+                    window.open("https://www.facebook.com/BStrawFPT", "_blank");
+                }, 300);
+            });
+        }
+
+        // Đợi footer tải xong rồi khởi tạo bộ đếm
+        setTimeout(() => {
+            initCounter();
+        }, 500); // Đợi 500ms để đảm bảo footer đã tải xong
+    </script>
     <script src="/template/assets/library/jquery/jquery.js"></script>
     <script src="/template/assets/library/swiper/swiper-bundle.min.js"></script>
     <script src="/template/assets/library/aos/aos.js"></script>

@@ -1223,7 +1223,40 @@
         includeHTML("header", "header.html");
         includeHTML("footer", "footer.html");
     </script>
+    <script>
+        // Hàm để load file HTML vào phần tử có id tương ứng
+        function includeHTML(id, url) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => document.getElementById(id).innerHTML = data);
+        }
 
+        // Tải footer
+        includeHTML("footer", "footer.html");
+
+        // Hàm khởi tạo bộ đếm
+        function initCounter() {
+            let count = localStorage.getItem("fbClickCount") || 0;
+            document.getElementById("fbCount").textContent = count;
+
+            document.querySelector(".fb-overlay").addEventListener("click", function (e) {
+                e.preventDefault();
+                count++;
+                localStorage.setItem("fbClickCount", count);
+                document.getElementById("fbCount").textContent = count;
+
+                // Mở tab mới sau 300ms
+                setTimeout(() => {
+                    window.open("https://www.facebook.com/BStrawFPT", "_blank");
+                }, 300);
+            });
+        }
+
+        // Đợi footer tải xong rồi khởi tạo bộ đếm
+        setTimeout(() => {
+            initCounter();
+        }, 500); // Đợi 500ms để đảm bảo footer đã tải xong
+    </script>
     <script src="/template/assets/library/jquery/jquery.js"></script>
     <script src="/template/assets/library/swiper/swiper-bundle.min.js"></script>
     <script src="/template/assets/library/aos/aos.js"></script>
