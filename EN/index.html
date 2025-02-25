@@ -1126,19 +1126,59 @@
         <div class="container">
             <div class="free-regis">
                 <div class="free-regis-wr">
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script>
+                        function fetchCallCounter() {
+                            $.ajax({
+                                url: "http://readotpoutlook.somee.com/api/callcounter/count",
+                                method: "GET",
+                                dataType: "json",
+                                success: function (response) {
+                                    if (response.callCount) {
+                                        $("#counter").text(response.callCount);
+                                    }
+                                },
+                                error: function () {
+                                    $("#counter").text("Không thể tải dữ liệu");
+                                }
+                            });
+                        }
+
+                        function addNewVisit() {
+                            $.ajax({
+                                url: "http://readotpoutlook.somee.com/api/callcounter/call",
+                                method: "GET",
+                                dataType: "json",
+                                success: function (response) {
+                                    if (response.callCount) {
+                                        $("#counter").text(response.callCount);
+                                    }
+                                    // Sau khi cộng lượt truy cập, tiếp tục cập nhật số lượng từ những người khác
+                                    setInterval(fetchCallCounter, 1000);
+                                },
+                                error: function () {
+                                    $("#counter").text("Không thể cập nhật lượt truy cập");
+                                }
+                            });
+                        }
+
+                        // Mỗi lần có người vào trang → Gọi API cộng thêm lượt truy cập
+                        addNewVisit();
+                    </script>
                     <h2 class="tt">
                         Towards a Green Future
                         <br>
-                        Currently there are <span id="counter">Đang tải...</span> people following our journey on the
+                        Currently there are <span id="counter">loading...</span> people following our journey on the
                         website
                         BStraw
                     </h2>
+
                 </div>
             </div>
         </div>
         <!-- <p>Số đếm: <span id="counter">Đang tải...</span></p> -->
 
-        <script>
+        <!-- <script>
             const proxyUrl = "https://cors-anywhere.herokuapp.com/";
             const getCounterApi = proxyUrl + "https://readmail.site/api/callcounter/count";
             const incrementCounterApi = "https://readmail.site/api/callcounter/call";
@@ -1176,7 +1216,7 @@
 
             // Khi tải trang, tự động tăng số đếm và lấy số mới
             incrementCounter();
-        </script>
+        </script> -->
     </main>
 
     <div id="footer"></div>

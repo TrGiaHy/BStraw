@@ -1159,58 +1159,79 @@
         <div class="container">
             <div class="free-regis">
                 <div class="free-regis-wr">
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script>
+                        function fetchCallCounter() {
+                            $.ajax({
+                                url: "http://readotpoutlook.somee.com/api/callcounter/count",
+                                method: "GET",
+                                dataType: "json",
+                                success: function (response) {
+                                    if (response.callCount) {
+                                        $("#counter").text(response.callCount);
+                                    }
+                                },
+                                error: function () {
+                                    $("#counter").text("Không thể tải dữ liệu");
+                                }
+                            });
+                        }
+
+                        function addNewVisit() {
+                            $.ajax({
+                                url: "http://readotpoutlook.somee.com/api/callcounter/call",
+                                method: "GET",
+                                dataType: "json",
+                                success: function (response) {
+                                    if (response.callCount) {
+                                        $("#counter").text(response.callCount);
+                                    }
+                                    // Sau khi cộng lượt truy cập, tiếp tục cập nhật số lượng từ những người khác
+                                    setInterval(fetchCallCounter, 1000);
+                                },
+                                error: function () {
+                                    $("#counter").text("Không thể cập nhật lượt truy cập");
+                                }
+                            });
+                        }
+
+                        // Mỗi lần có người vào trang → Gọi API cộng thêm lượt truy cập
+                        addNewVisit();
+                    </script>
+
                     <h2 class="tt">
                         Hướng tới một tương lai xanh
                         <br>
                         Hiện đang có <span id="counter">Đang tải...</span> người cùng đồng hành trên hành trình của
                         chúng tôi trên
-                        website
-                        BStraw
+                        website BStraw
                     </h2>
+
                 </div>
             </div>
         </div>
         <!-- <p>Số đếm: <span id="counter">Đang tải...</span></p> -->
 
-        <script>
-            const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-            const getCounterApi = proxyUrl + "https://readmail.site/api/callcounter/count";
-            const incrementCounterApi = "https://readmail.site/api/callcounter/call";
-
-            async function incrementCounter() {
-                try {
-                    await fetch(incrementCounterApi, { mode: "no-cors" }); // Gọi API tăng số đếm
-                    setTimeout(getCounter, 1000); // Chờ 1 giây rồi cập nhật số
-                } catch (error) {
-                    console.error("Lỗi khi tăng số đếm:", error);
-                }
+        <!-- <script>
+            function fetchCallCounter() {
+                $.ajax({
+                    url: "http://readotpoutlook.somee.com/api/callcounter/call",
+                    method: "GET",
+                    dataType: "json",
+                    success: function (response) {
+                        $("#counter").text(response.callCount);
+                    },
+                    error: function () {
+                        $("#counter").text("Error fetching data");
+                    }
+                });
             }
 
-            async function getCounter() {
-                try {
-                    const response = await fetch(getCounterApi);
+            // Gọi API mỗi 5 giây
+            fetchCallCounter();
+            setInterval(fetchCallCounter, 1000);
+        </script> -->
 
-                    if (!response.ok) {
-                        throw new Error(`Lỗi API: ${response.status} ${response.statusText}`);
-                    }
-
-                    const data = await response.json();
-                    console.log("API Response:", data);
-
-                    if (data.callCount !== undefined) {
-                        document.getElementById("counter").innerText = data.callCount;
-                    } else {
-                        throw new Error("Dữ liệu API không hợp lệ");
-                    }
-                } catch (error) {
-                    console.error("Lỗi khi lấy số đếm:", error);
-                    document.getElementById("counter").innerText = "Không lấy được số";
-                }
-            }
-
-            // Khi tải trang, tự động tăng số đếm và lấy số mới
-            incrementCounter();
-        </script>
     </main>
 
     <div id="footer"></div>
