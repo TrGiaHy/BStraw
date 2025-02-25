@@ -1129,36 +1129,53 @@
                     <h2 class="tt">
                         Towards a Green Future
                         <br>
-                        Currently there are <span id="visitCount">0</span> people following our journey on the website
+                        Currently there are <span id="counter">Đang tải...</span> npeople following our journey on the
+                        website
                         BStraw
                     </h2>
                 </div>
             </div>
         </div>
+        <!-- <p>Số đếm: <span id="counter">Đang tải...</span></p> -->
+
         <script>
-            // Hàm đọc giá trị từ cookie
-            function getCookie(name) {
-                const value = `; ${document.cookie}`;
-                const parts = value.split(`; ${name}=`);
-                if (parts.length === 2) return parts.pop().split(';').shift();
+            const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+            const getCounterApi = proxyUrl + "https://readmail.site/api/callcounter/count";
+            const incrementCounterApi = "https://readmail.site/api/callcounter/call";
+
+            async function incrementCounter() {
+                try {
+                    await fetch(incrementCounterApi, { mode: "no-cors" }); // Gọi API tăng số đếm
+                    setTimeout(getCounter, 1000); // Chờ 1 giây rồi cập nhật số
+                } catch (error) {
+                    console.error("Lỗi khi tăng số đếm:", error);
+                }
             }
 
-            // Hàm ghi giá trị vào cookie
-            function setCookie(name, value, days) {
-                const date = new Date();
-                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
+            async function getCounter() {
+                try {
+                    const response = await fetch(getCounterApi);
+
+                    if (!response.ok) {
+                        throw new Error(`Lỗi API: ${response.status} ${response.statusText}`);
+                    }
+
+                    const data = await response.json();
+                    console.log("API Response:", data);
+
+                    if (data.callCount !== undefined) {
+                        document.getElementById("counter").innerText = data.callCount;
+                    } else {
+                        throw new Error("Dữ liệu API không hợp lệ");
+                    }
+                } catch (error) {
+                    console.error("Lỗi khi lấy số đếm:", error);
+                    document.getElementById("counter").innerText = "Không lấy được số";
+                }
             }
 
-            // Lấy giá trị từ cookie
-            let visitCount = parseInt(getCookie('visitCount')) || 0;
-
-            // Tăng giá trị lên 1
-            visitCount++;
-            setCookie('visitCount', visitCount, 30); // Lưu trong 30 ngày
-
-            // Hiển thị giá trị lên trang
-            document.getElementById('visitCount').textContent = visitCount;
+            // Khi tải trang, tự động tăng số đếm và lấy số mới
+            incrementCounter();
         </script>
     </main>
 
