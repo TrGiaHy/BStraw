@@ -1128,41 +1128,55 @@
                 <div class="free-regis-wr">
                     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                     <script>
+                        const API_BASE = "https://api.allorigins.win/get?url="; // Proxy bypass CORS
+                        const COUNT_URL = encodeURIComponent("http://readotpoutlook.somee.com/api/callcounter/count");
+                        const CALL_URL = encodeURIComponent("http://readotpoutlook.somee.com/api/callcounter/call");
+
                         function fetchCallCounter() {
                             $.ajax({
-                                url: "http://readotpoutlook.somee.com/api/callcounter/count",
+                                url: API_BASE + COUNT_URL,
                                 method: "GET",
                                 dataType: "json",
                                 success: function (response) {
-                                    if (response.callCount) {
-                                        $("#counter").text(response.callCount);
+                                    let data = JSON.parse(response.contents);
+                                    if (data.callCount) {
+                                        $("#counter").text(data.callCount);
+                                        localStorage.setItem("lastCount", data.callCount);
                                     }
                                 },
                                 error: function () {
-                                    $("#counter").text("Không thể tải dữ liệu");
+                                    let lastCount = localStorage.getItem("lastCount") || "Không thể tải dữ liệu";
+                                    $("#counter").text(lastCount);
                                 }
                             });
                         }
 
                         function addNewVisit() {
-                            $.ajax({
-                                url: "http://readotpoutlook.somee.com/api/callcounter/call",
-                                method: "GET",
-                                dataType: "json",
-                                success: function (response) {
-                                    if (response.callCount) {
-                                        $("#counter").text(response.callCount);
+                            if (!localStorage.getItem("visited")) { // Kiểm tra nếu người dùng chưa vào trước đó
+                                $.ajax({
+                                    url: API_BASE + CALL_URL,
+                                    method: "GET",
+                                    dataType: "json",
+                                    success: function (response) {
+                                        let data = JSON.parse(response.contents);
+                                        if (data.callCount) {
+                                            $("#counter").text(data.callCount);
+                                            localStorage.setItem("lastCount", data.callCount);
+                                        }
+                                        localStorage.setItem("visited", "true");
+                                        setInterval(fetchCallCounter, 1000); // Cập nhật số lượng từ người khác mỗi 1s
+                                    },
+                                    error: function () {
+                                        $("#counter").text("Không thể cập nhật lượt truy cập");
                                     }
-                                    // Sau khi cộng lượt truy cập, tiếp tục cập nhật số lượng từ những người khác
-                                    setInterval(fetchCallCounter, 1000);
-                                },
-                                error: function () {
-                                    $("#counter").text("Không thể cập nhật lượt truy cập");
-                                }
-                            });
+                                });
+                            } else {
+                                fetchCallCounter(); // Nếu đã vào trước đó, chỉ cập nhật lượt truy cập từ API
+                                setInterval(fetchCallCounter, 1000);
+                            }
                         }
 
-                        // Mỗi lần có người vào trang → Gọi API cộng thêm lượt truy cập
+                        // Mỗi lần có người vào trang → Gọi API cộng thêm lượt truy cập nếu chưa vào trước đó
                         addNewVisit();
                     </script>
                     <h2 class="tt">
